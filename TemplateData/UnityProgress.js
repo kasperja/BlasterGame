@@ -5,19 +5,12 @@ function UnityProgress (dom) {
 
 	var parent = dom.parentNode;
 
-	//var background = document.createElement("div");
-	//background.style.background = "#4D4D4D";
-	//background.style.position = "absolute";
-	//parent.appendChild(background);
-	//this.background = background;
-	
-	var spinner = document.createElement("img");
-	spinner.src = "TemplateData/712.GIF"; 
-	spinner.style.position = "absolute";
-	parent.appendChild(spinner);
-	this.spinner = spinner;
-	this.spinner.style.display = "none";
-	
+	var background = document.createElement("div");
+	background.style.background = "#4D4D4D";
+	background.style.position = "absolute";
+	parent.appendChild(background);
+	this.background = background;
+
 	var logoImage = document.createElement("img");
 	logoImage.src = "TemplateData/progresslogo.png"; 
 	logoImage.style.position = "absolute";
@@ -44,10 +37,7 @@ function UnityProgress (dom) {
 
 	this.SetProgress = function (progress) { 
 		if (this.progress < progress)
-			this.progress = progress;
-			
-		if (progress == 1) {this.spinner.style.display = "inline";}
-			 
+			this.progress = progress; 
 		this.messageArea.style.display = "none";
 		this.progressFrame.style.display = "inline";
 		this.progressBar.style.display = "inline";			
@@ -56,7 +46,7 @@ function UnityProgress (dom) {
 
 	this.SetMessage = function (message) { 
 		this.message = message; 
-		//this.background.style.display = "inline";
+		this.background.style.display = "inline";
 		this.logoImage.style.display = "inline";
 		this.progressFrame.style.display = "none";
 		this.progressBar.style.display = "none";			
@@ -64,19 +54,17 @@ function UnityProgress (dom) {
 	}
 
 	this.Clear = function() {
-		//this.background.style.display = "none";
-		this.messageArea.style.display = "none";
+		this.background.style.display = "none";
 		this.logoImage.style.display = "none";
 		this.progressFrame.style.display = "none";
 		this.progressBar.style.display = "none";
-		this.spinner.style.display = "none";
 	}
 
 	this.Update = function() {
-		//this.background.style.top = this.dom.offsetTop + 'px';
-		//this.background.style.left = this.dom.offsetLeft + 'px';
-		//this.background.style.width = this.dom.offsetWidth + 'px';
-		//this.background.style.height = this.dom.offsetHeight + 'px';
+		this.background.style.top = this.dom.offsetTop + 'px';
+		this.background.style.left = this.dom.offsetLeft + 'px';
+		this.background.style.width = this.dom.offsetWidth + 'px';
+		this.background.style.height = this.dom.offsetHeight + 'px';
 
 		var logoImg = new Image();
 		logoImg.src = this.logoImage.src;
@@ -87,14 +75,11 @@ function UnityProgress (dom) {
 		this.logoImage.style.left = this.dom.offsetLeft + (this.dom.offsetWidth * 0.5 - logoImg.width * 0.5) + 'px';
 		this.logoImage.style.width = logoImg.width+'px';
 		this.logoImage.style.height = logoImg.height+'px';
-		
+
 		this.progressFrame.style.top = this.dom.offsetTop + (this.dom.offsetHeight * 0.5 + logoImg.height * 0.5 + 10) + 'px';
 		this.progressFrame.style.left = this.dom.offsetLeft + (this.dom.offsetWidth * 0.5 - progressFrameImg.width * 0.5) + 'px';
 		this.progressFrame.width = progressFrameImg.width;
 		this.progressFrame.height = progressFrameImg.height;
-		
-		this.spinner.style.top = this.dom.offsetTop + (this.dom.offsetHeight * 0.5 + logoImg.height * 0.5 + 20 + progressFrameImg.height) + 'px';
-		this.spinner.style.left = this.dom.offsetLeft + (this.dom.offsetWidth * 0.5 - spinner.width * 0.5) + 'px';
 
 		this.progressBar.style.top = this.progressFrame.style.top;
 		this.progressBar.style.left = this.progressFrame.style.left;
